@@ -53,6 +53,10 @@ const getTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
   try {
+    const task = await Task.findByIdAndUpdate(req.param.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
     res.status(200).json({
       status: "success",
       data: {
@@ -69,11 +73,10 @@ const updateTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
+    await Task.findOneAndDelete(req.params.id);
     res.status(200).json({
       status: "success",
-      data: {
-        task,
-      },
+      data: null,
     });
   } catch (error) {
     res.status(400).json({
