@@ -7,6 +7,11 @@ app.use(express.json());
 
 dotenv.config({ path: "./config.env" });
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 const DB = process.env.DATABASE.replace(
   "<PASSWORD>",
   process.env.DATABASE_PASSWORD
