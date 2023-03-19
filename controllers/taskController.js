@@ -73,7 +73,7 @@ const updateTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    await Task.findOneAndDelete(req.params.id);
+    await Task.findOneAndDelete({ _id: req.params.id });
     res.status(200).json({
       status: "success",
       data: null,
