@@ -2,7 +2,7 @@ const Task = require("./../Models/taskModel");
 
 const getAllTasks = async (req, res) => {
   try {
-    const tasks = await Task.find();
+    let tasks = await Task.find().select("-__v");
     res.status(200).json({
       status: "success",
       result: tasks.length,
@@ -73,7 +73,7 @@ const updateTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    await Task.findOneAndDelete({ _id: req.params.id });
+    // await Task.findOneAndDelete({ _id: req.params.id });
     res.status(200).json({
       status: "success",
       data: null,
